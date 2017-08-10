@@ -43,10 +43,6 @@ db.once("open", function() {
 
 var routes = require("./controller/news.js");
 app.use("/",routes);
-//In case of site down
-app.use(function(req, res) {
-  res.render("404");
-});
 
 app.listen(port, function() {
   console.log("App running on port 3000!");
