@@ -52,8 +52,9 @@ router.get("/scrape", function(req, res) {
           console.log("Empty Content.")
         } 
     });
-    res.redirect("/articles");
   });
+
+  res.redirect("/articles");
 });
 
 router.get("/articles", function (req, res){
