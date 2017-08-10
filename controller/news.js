@@ -13,7 +13,7 @@ router.get("/", function (req, res){
 });
 
 router.get("/scrape", function(req, res) {
-  request("http://www.theonion.com/", function(error, res, html) {
+  request("http://www.theonion.com", function(error, res, html) {
     var $ = cheerio.load(html);
     var titlesArray = [];
 
@@ -22,7 +22,7 @@ router.get("/scrape", function(req, res) {
         result.title = $(this).children("header").children("h2").text().trim() + ""; 
         result.link = "http://www.theonion.com" + $(this).children("header")
           .children("h2").children("a").attr("href").trim();
-        result.summary = $(this).children("div").text().trim() + ""; 
+        result.summary = $(this).children(".desc").text().trim() + ""; 
       
         if(result.title !== "" && result.summary !== ""){
           if(titlesArray.indexOf(result.title) == -1){
@@ -58,7 +58,7 @@ router.get("/scrape", function(req, res) {
 });
 
 router.get("/articles", function (req, res){
-  Article.find().sort({_id: -1}).populate("comments").exec(function(err, doc){
+  Article.find().sort({_id: -1}).populate("notes").exec(function(err, doc){
       if (err){
         console.log(err);
       } 
@@ -84,7 +84,7 @@ router.post("/add/comment/:id", function (req, res){
     } 
     else {
       Article.findOneAndUpdate({"_id": articleId},
-      {$push: {"notes":doc._id}}, {new: true})
+      {$set: {"notes":doc._id}}, {new: true})
       .exec(function(err, doc){
         if (err){
           console.log(err);

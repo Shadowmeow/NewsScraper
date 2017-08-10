@@ -2,8 +2,7 @@ $(document).ready(function(){
   $(".add-comment-button").on("click", function(){
     var articleId = $(this).data("id");
     var baseURL = window.location.origin;
-    var frmName = "form-add-" + articleId;
-    var frm = $("#" + frmName);
+    var frm = $("#form-add-" + articleId);
 
     $.ajax({
       url: baseURL + "/add/comment/" + articleId,
