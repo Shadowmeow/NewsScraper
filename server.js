@@ -24,22 +24,28 @@ app.use(express.static(__dirname + "/public"));
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
+if(process.env.NODE_ENV == "production"){
+  mongoose.connect("mongodb://heroku_18kdbb7f:9jecg3e8si4gnpn1j4g5smv3q8@ds029735.mlab.com:29735/heroku_18kdbb7f");
+}
+else{
+  mongoose.connect("mongodb://localhost/news-scraper");
+}
 
 var db = mongoose.connection;
 
-db.on('error', function(err) {
-  console.log('Mongoose Error: ', err);
+db.on("error", function(err) {
+  console.log("Mongoose Error: ", err);
 });
 
-db.once('open', function() {
-  console.log('Mongoose connection successful.');
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
 });
 
-var routes = require('./controller/news.js');
-app.use('/',routes);
+var routes = require("./controller/news.js");
+app.use("/",routes);
 //In case of site down
 app.use(function(req, res) {
-  res.render('404');
+  res.render("404");
 });
 
 app.listen(port, function() {
