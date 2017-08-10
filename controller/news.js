@@ -68,7 +68,7 @@ router.get("/articles", function (req, res){
     });
 });
 
-router.post('/add/comment/:id', function (req, res){
+router.post("/add/comment/:id", function (req, res){
   var articleId = req.params.id;
   var author = req.body.author;
   var note = req.body.body;
@@ -84,8 +84,8 @@ router.post('/add/comment/:id', function (req, res){
       console.log(err);
     } 
     else {
-      Article.findOneAndUpdate({'_id': articleId},
-      {$push: {'comments':doc._id}}, {new: true})
+      Article.findOneAndUpdate({"_id": articleId},
+      {$push: {"comments":doc._id}}, {new: true})
       .exec(function(err, doc){
         if (err){
           console.log(err);
@@ -97,7 +97,7 @@ router.post('/add/comment/:id', function (req, res){
   });
 });
 
-router.post('/remove/comment/:id', function (req, res){
+router.post("/remove/comment/:id", function (req, res){
   var noteId = req.params.id;
 
   Note.findByIdAndRemove(noteId, function (err, todo) {      
