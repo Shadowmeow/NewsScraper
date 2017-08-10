@@ -71,11 +71,9 @@ router.get("/articles", function (req, res){
 
 router.post("/add/comment/:id", function (req, res){
   var articleId = req.params.id;
-  var author = req.body.author;
-  var note = req.body.body;
   var result = {
-    author: author,
-    body: body
+    author: req.body.author,
+    body: req.body.note
   };
 
   var entry = new Note(result);
@@ -86,7 +84,7 @@ router.post("/add/comment/:id", function (req, res){
     } 
     else {
       Article.findOneAndUpdate({"_id": articleId},
-      {$push: {"comments":doc._id}}, {new: true})
+      {$push: {"notes":doc._id}}, {new: true})
       .exec(function(err, doc){
         if (err){
           console.log(err);

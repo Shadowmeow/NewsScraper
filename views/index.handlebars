@@ -26,7 +26,7 @@
           <div class="row">
             <div class="input-field col s2"></div>
             <div class="input-field col s8">
-              <input id="author_name" name="name" type="text" class="validate">
+              <input id="author_name" name="author" type="text" class="validate">
               <label for="author_name">Your Name:</label>
             </div>
           </div>
@@ -54,9 +54,9 @@
       <div class="collapsible-header"><i class="material-icons">thumbs_up_down</i>View Comments</div>
       <div class="collapsible-body" style="background-color: white;">
 
-        {{#if comments}}
+        {{#if notes}}
           <ul class="collection">
-            {{#each comments}}
+            {{#each notes}}
               <li class="collection-item">
 
                 <b>{{author}}</b> 
@@ -69,12 +69,12 @@
 
                 <br>
 
-                {{content}}
+                {{body}}
               </li> 
             {{/each}}
           </ul>
         {{else}}
-          <p>No Comments Yet :( </p>
+          <p>No Comments Yet</p>
         {{/if}}
       </div>
     </li>

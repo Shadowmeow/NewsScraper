@@ -9,8 +9,7 @@ var port = process.env.PORT || 3000;
 
 var app = express();
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.use(express.static(__dirname + "/public"));
 //Morgan logging
 app.use(logger("dev"));
 //Bodyparser settings
@@ -19,7 +18,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.use(express.static(__dirname + "/public"));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
@@ -42,6 +42,7 @@ db.once("open", function() {
 });
 
 var routes = require("./controller/news.js");
+
 app.use("/",routes);
 
 app.listen(port, function() {

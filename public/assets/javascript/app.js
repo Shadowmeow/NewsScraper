@@ -2,13 +2,13 @@ $(document).ready(function(){
   $(".add-comment-button").on("click", function(){
     var articleId = $(this).data("id");
     var baseURL = window.location.origin;
-    var formName = "form-add-" + articleId;
-    var form = $("#" + formName);
+    var frmName = "form-add-" + articleId;
+    var frm = $("#" + frmName);
 
     $.ajax({
       url: baseURL + "/add/comment/" + articleId,
       type: "POST",
-      data: form.serialize(),
+      data: frm.serialize()
     })
     .done(function() {
       location.reload();
