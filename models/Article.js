@@ -17,10 +17,10 @@ var ArticleSchema = new Schema({
     required: true
   },
 
-  notes: {
+  notes: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
-  },
+  }],
 
   updated: {
     type: Date,

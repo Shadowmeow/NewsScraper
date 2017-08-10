@@ -5,3 +5,13 @@ h1 {
 
 b {
 	font-size: 18px;
+
+.collapsible-body {
+	background-color: white;
+}
+
+.delete-comment {
+	color: white; 
+	background-color: red; 
+	border-color: red;
+}

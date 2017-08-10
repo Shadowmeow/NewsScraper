@@ -104,7 +104,7 @@ router.post("/remove/comment/:id", function (req, res){
       console.log(err);
     } 
     else {
-      res.sendStatus(200);
+      res.redirect("/");
     }
   });
 });

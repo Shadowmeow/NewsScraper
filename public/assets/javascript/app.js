@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $(".add-comment-button").on("click", function(){
+  $(".add-comment").on("click", function(){
     var articleId = $(this).data("id");
     var baseURL = window.location.origin;
     var frm = $("#form-add-" + articleId);
@@ -15,7 +15,7 @@ $(document).ready(function(){
     return false;
   });
 
-  $(".delete-comment-button").on("click", function(){
+  $(".delete-comment").on("click", function(){
     var commentId = $(this).data("id");
     var baseURL = window.location.origin;
 
