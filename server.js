@@ -2,8 +2,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var path = require("path");
 var exphbs = require("express-handlebars");
+var request = require("request");
+var cheerio = require("cheerio");
 var port = process.env.PORT || 3000;
 
 var app = express();
@@ -19,6 +20,27 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(__dirname + "/public"));
+
+var Note = require("./models/Note.js");
+var Article = require("./models/Article.js");
+
+if(process.env.NODE_ENV == "production"){
+  mongoose.connect("");
+}
+else{
+  mongoose.connect('mongodb://localhost/news-scraper');
+  connect('mongodb://heroku_60zpcwg0:ubn0n27pi2856flqoedo9glvh8@ds119578.mlab.com:19578/heroku_60zpcwg0');
+}
+
+var db = mongoose.connection;
+
+db.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
+});
+
+db.once('open', function() {
+  console.log('Mongoose connection successful.');
+});
 
 var routes = require('./controller/news.js');
 app.use('/',routes);
